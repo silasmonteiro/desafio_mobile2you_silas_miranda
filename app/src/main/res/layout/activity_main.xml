@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".presentation.MainActivity">
+
+    <ImageView
+        android:id="@+id/iv_principal"
+        android:layout_width="560dp"
+        android:layout_height="350dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/johnny_depp_wallpaper" />
+
+    <TextView
+        android:id="@+id/tv_titulo"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/white"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_principal"
+        tools:text="The Very Best Of Johnny Depp" />
+
+    <ImageView
+        android:id="@+id/iv_liketitulo"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_principal"
+        app:srcCompat="@drawable/coracaobranco" />
+
+    <ImageView
+        android:id="@+id/iv_qtdlikes"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_titulo"
+        app:srcCompat="@drawable/coracaobranco" />
+
+    <TextView
+        android:id="@+id/tv_qtdlikes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/iv_qtdlikes"
+        app:layout_constraintTop_toBottomOf="@+id/tv_titulo"
+        tools:text="1,2K Likes" />
+
+    <ImageView
+        android:id="@+id/iv_iconeassistidos"
+        android:layout_width="25dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="14dp"
+        app:layout_constraintStart_toEndOf="@+id/tv_qtdlikes"
+        app:layout_constraintTop_toBottomOf="@+id/tv_titulo"
+        app:srcCompat="@android:drawable/ic_menu_view" />
+
+    <TextView
+        android:id="@+id/tv_qtdassistidos"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/iv_iconeassistidos"
+        app:layout_constraintTop_toBottomOf="@+id/tv_titulo"
+        tools:text="3 of 10 wachted" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_movie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/iv_qtdlikes"
+        tools:itemCount="8"
+        tools:layout_editor_absoluteX="0dp"
+        tools:listitem="@layout/item_recommended_movies"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

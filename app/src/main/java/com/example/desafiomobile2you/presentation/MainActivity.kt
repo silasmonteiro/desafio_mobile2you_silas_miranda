@@ -18,15 +18,27 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setupObserverViewState(viewModel)
+        setupObserverViewStateRecommended(viewModel)
         viewModel.getMovieDetails()
+
 
     }
 
     private fun setupObserverViewState(viewModel: MainViewModel) {
-        viewModel.movieLiveData.observe(this, Observer { viewState ->
+        viewModel.movieLiveData.observe(this,  { viewState ->
             when (viewState.status) {
 
                 ResponseStatus.SUCCESS -> setupView(viewState.data)
+                ResponseStatus.ERROR -> showMessageError(viewState.error)
+            }
+        })
+    }
+
+    private fun setupObserverViewStateRecommended(viewModel: MainViewModel){
+        viewModel.recommendedLiveData.observe(this,  { viewState ->
+            when (viewState.status) {
+
+                ResponseStatus.SUCCESS -> setupViewRecommended(viewState.data)
                 ResponseStatus.ERROR -> showMessageError(viewState.error)
             }
         })
@@ -44,8 +56,18 @@ class MainActivity : AppCompatActivity() {
         tv_titulo.text = movie?.title
         tv_qtdlikes.text = movie?.voteCount.toString()
         tv_qtdassistidos.text = movie?.popularity.toString()
-
+        movie?.let {
+            viewModel.getMovieRecommended(it.id.toString())
+        }
     }
+
+    private fun setupViewRecommended( movieRecommended: List<Movie>?){
+
+        val movie = movieRecommended?.first()
+        Toast.makeText(this,movie?.title,Toast.LENGTH_LONG).show()
+
+            }
+
 }
 
 

@@ -15,5 +15,11 @@ interface MovieService {
         @Path("movie_id") movieId: String,
         @Query("api_key") api_key: String = API_KEY
     ): Response<Movie>
+
+    @GET("movie/{movie_id}/similar")
+    suspend fun getRecommendedMovie(
+        @Path("movie_id") movieId: String,
+        @Query("api_key") api_key: String = API_KEY
+    ): Response<List<Movie>>
 }
 

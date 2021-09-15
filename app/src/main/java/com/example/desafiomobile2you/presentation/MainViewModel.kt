@@ -59,10 +59,10 @@ class MainViewModel(
         scope.launch(dispatcherProvider.io) {
             when (val response = getRecommendedUseCase.getRecommended(movieId)) {
                 is Result.Success -> {
-                    response.data.let { movie ->
+                    response.data?.results?.let { movie ->
                         _recommendedLiveData.postValue(
                             ViewState(
-                                movie.results,
+                                movie,
                                 ResponseStatus.SUCCESS
                             )
                         )

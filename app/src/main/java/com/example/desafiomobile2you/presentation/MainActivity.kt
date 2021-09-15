@@ -1,9 +1,9 @@
 package com.example.desafiomobile2you.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.lifecycle.Observer
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.desafiomobile2you.R
 import com.example.desafiomobile2you.domain.model.Movie
 import com.example.desafiomobile2you.util.ResponseStatus
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupObserverViewState(viewModel: MainViewModel) {
-        viewModel.movieLiveData.observe(this,  { viewState ->
+        viewModel.movieLiveData.observe(this, { viewState ->
             when (viewState.status) {
 
                 ResponseStatus.SUCCESS -> setupView(viewState.data)
@@ -34,8 +34,8 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun setupObserverViewStateRecommended(viewModel: MainViewModel){
-        viewModel.recommendedLiveData.observe(this,  { viewState ->
+    private fun setupObserverViewStateRecommended(viewModel: MainViewModel) {
+        viewModel.recommendedLiveData.observe(this, { viewState ->
             when (viewState.status) {
 
                 ResponseStatus.SUCCESS -> setupViewRecommended(viewState.data)
@@ -45,8 +45,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showMessageError(error: Throwable?) {
-        error?.localizedMessage.let{
-            Toast.makeText(this,it,Toast.LENGTH_LONG).show()
+        error?.localizedMessage.let {
+            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
         }
 
     }
@@ -61,12 +61,20 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupViewRecommended( movieRecommended: List<Movie>?){
-
-        val movie = movieRecommended?.first()
-        Toast.makeText(this,movie?.title,Toast.LENGTH_LONG).show()
-
+    private fun setupViewRecommended(movieRecommended: List<Movie>?) {
+        movieRecommended?.let {
+            rv_movie.apply {
+                layoutManager = LinearLayoutManager(
+                    this@MainActivity,
+                    LinearLayoutManager.VERTICAL,
+                    false
+                )
+                adapter = MovieRecommendedAdapter(it)
             }
+        }
+
+
+    }
 
 }
 

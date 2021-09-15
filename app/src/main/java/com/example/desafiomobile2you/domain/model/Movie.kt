@@ -1,6 +1,7 @@
 package com.example.desafiomobile2you.domain.model
 
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 class Movie(
 
@@ -12,6 +13,8 @@ class Movie(
     @SerializedName("original_title")
     val title: String?,
 
-    val popularity: Double?
+    val popularity: Double?,
 
+    @SerializedName("release_date")
+    val releaseData: Date
 )

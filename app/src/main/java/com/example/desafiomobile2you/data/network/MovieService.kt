@@ -16,3 +16,4 @@ interface MovieService {
         @Query("api_key") api_key: String = API_KEY
     ): Response<Movie>
 }
+

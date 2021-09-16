@@ -1,12 +1,16 @@
 package com.example.desafiomobile2you.presentation
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.desafiomobile2you.R
 import com.example.desafiomobile2you.domain.model.Movie
 import com.example.desafiomobile2you.util.ResponseStatus
+import com.example.desafiomobile2you.util.extension.createImagePath
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -21,7 +25,19 @@ class MainActivity : AppCompatActivity() {
         setupObserverViewStateRecommended(viewModel)
         viewModel.getMovieDetails()
 
+        setListeners()
 
+
+    }
+
+    private fun setListeners() {
+        iv_unliked.setOnClickListener {
+            iv_liked.visibility = if (iv_liked.isVisible) {
+                View.GONE
+            } else {
+                View.VISIBLE
+            }
+        }
     }
 
     private fun setupObserverViewState(viewModel: MainViewModel) {
@@ -56,6 +72,7 @@ class MainActivity : AppCompatActivity() {
         tv_titulo.text = movie?.title
         tv_qtdlikes.text = movie?.voteCount.toString()
         tv_qtdassistidos.text = movie?.popularity.toString()
+        Picasso.get().load(movie?.backdropPath?.createImagePath()).into(iv_principal)
         movie?.let {
             viewModel.getMovieRecommended(it.id.toString())
         }

@@ -16,5 +16,14 @@ class Movie(
     val popularity: Double?,
 
     @SerializedName("release_date")
-    val releaseData: Date
+    val releaseData: String,
+
+    @SerializedName("backdrop_path")
+    val backdropPath: String?,
+
+    @SerializedName("poster_path")
+    val posterPath: String,
+
+    @SerializedName("genre_ids")
+    val genreIds: List<Int>
 )
